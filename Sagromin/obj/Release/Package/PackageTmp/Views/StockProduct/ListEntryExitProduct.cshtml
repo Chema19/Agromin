@@ -1,0 +1,77 @@
+﻿@model Sagromin.ViewModels.StockProduct.ListEntryExitProductViewModel
+
+@{
+    ViewBag.Section = "Entrada y salida de productos";
+    ViewBag.Title = "Lista de entrada y salida de productos";
+    ViewBag.Icon = "fab fa-product-hunt";
+    var index = 1;
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-box">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-box">
+            <h4 class="header-title">Entrada y salida de productos</h4>
+            <p class="sub-header">
+                Lista de entrada y salida de productos Sagromin.
+            </p>
+
+            <div class="table-responsive">
+                <table class="table mb-0" id="tblProduct">
+                    <thead>
+                        <tr>
+                            <th width="12.5%">#</th>
+                            <th width="12.5%">Producto</th>
+                            <th width="12.5%">Marca</th>
+                            <th width="12.5%">Cantidad</th>
+                            <th width="12.5%">Fecha</th>
+                            <th width="12.5%">Usuario</th>
+                            <th width="12.5%">Estado</th>
+                            <th width="12.5%">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.LstEntryExitProduct)
+                        {
+                        <tr class="@(index % 2 != 1 ? "" : "table-info") ">
+                            <th scope="row">@index</th>
+                            <td>@item.ProductBrand.Product.Name</td>
+                            <td>@item.ProductBrand.Brand.Name</td>
+                            <td>@item.Amount</td>
+                            <td>@item.Creation_Date</td>
+                            <td>@item.User.Names</td>   
+                            <td>@Html.Raw(ConstantHelpers.ESTADO.GetLabelEstado(item.StatusType))</td>
+                            <td>
+                                <a @Data.ModalLink("_AddEditEntryExitProduct", "Product", new { EntryExitProductId = item.EntryExitProductId })><i class="fa fa-eye" style="color:dodgerblue"></i></a>&nbsp;
+                            </td>
+                        </tr>
+                            index++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mb-2">
+                <div class="row">
+                    <div class="col-12 text-sm-center form-inline">
+                        <div class="mr-2">
+                            <a  class="btn btn-info btn-rounded" href="@Url.Action("ListStockProduct","StockProduct")" style="margin-top: 30px;"><i class="fas fa-arrow-left mr-2"></i> Atras </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+    </script>
+}

@@ -1,0 +1,90 @@
+﻿@model Sagromin.ViewModels.Brand.ListBrandViewModel
+
+@{
+    ViewBag.Section = "Marca";
+    ViewBag.Title = "Lista de marca";
+    ViewBag.Icon = "fab fa-Brand-hunt";
+    var index = 1;
+}
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="card-box">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-box">
+            <h4 class="header-title">Marca</h4>
+            <p class="sub-header">
+                Lista de marca Sagromin.
+            </p>
+
+            <div class="table-responsive">
+                <table class="table mb-0" id="tblBrand">
+                    <thead>
+                        <tr>
+                            <th width="25%">#</th>
+                            <th width="25%">Nombres</th>
+                            <th width="25%">Estado</th>
+                            <th width="25%">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.LstBrand)
+                        {
+                        <tr class="@(index % 2 != 1 ? "" : "table-info") ">
+                            <th scope="row">@index</th>
+                            <td>@(item.Name == null ? "Anónimo" : item.Name)</td>
+                            <td>@Html.Raw(ConstantHelpers.ESTADO.GetLabelEstado(item.Status))</td>
+                            <td>
+                                <a @Data.ModalLink("_AddEditBrand", "Brand", new { BrandId = item.BrandId })><i class="fa fa-edit" style="color:dodgerblue"></i></a>&nbsp;
+                                <a class="delete" id="@item.BrandId"><i class="fa fa-trash" style="color:orangered"></i></a>
+                            </td>
+                        </tr>
+                            index++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mb-2">
+                <div class="row">
+                    <div class="col-12 text-sm-center form-inline">
+                        <div class="mr-2">
+                            <button @Data.ModalLink("_AddEditBrand", "Brand") class="btn btn-success btn-rounded" style="margin-top: 30px;"><i class="mdi mdi-plus-circle mr-2"></i> Agregar Marca</button>
+                        </div>
+                        <div class="mr-2">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $('#tblBrand').on('click', '.delete', function () {
+            Swal.fire({
+                type: 'info',
+                title: 'Eliminar Marca',
+                text: 'Esta seguro de eliminar esta marca',
+                confirmButtonText: 'Si',
+                cancelButtonText: 'No',
+                showCancelButton: true,
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    var Brand_id = $(this)[0].attributes[1].nodeValue;
+                    ajaxDeleteObjectPostById('@Url.Action("_DeleteBrand", "Brand")', Brand_id, 'Marca');
+                }
+            })
+        });
+
+    </script>
+}

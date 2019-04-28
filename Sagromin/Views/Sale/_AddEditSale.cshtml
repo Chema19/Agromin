@@ -1,0 +1,366 @@
+﻿@model Sagromin.ViewModels.Sale._AddEditSaleViewModel
+
+@{
+    Layout = ConstantHelpers.LAYOUT.MODAL_LAYOUT_PATH;
+    ViewBag.Title = Model.SaleId.HasValue ? "Editar Venta" : "Agregar Venta";
+    ViewBag.ModalIcon = "fa fa-user";
+    ViewBag.Form = new ModalFormHelpers("_AddEditSale", "Sale", FormMethod.Post, new { id = "fmrs" });
+    ViewBag.ModalSize = "lg";
+}
+
+<style>
+    .select2-dropdown {
+        z-index: 999999;
+    }
+
+    .select2.select2-container.select2-container--default.select2-container--below {
+        width: 100% !important;
+    }
+
+    .select2.select2-container.select2-container--default {
+        width: 100% !important;
+    }
+
+    .swal2-container {
+        z-index: 999999;
+    }
+</style>
+
+@Html.HiddenFor(x => x.SaleId)
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body row">
+            @*<form class="needs-validation" novalidate>*@
+            <div class="col-md-6 mb-3">
+                <label for="" class=" col-form-label">@Html.LabelFor(x => x.NameLocal)<span class="text-danger">*</span></label>
+                @Html.TextBoxFor(x => x.NameLocal, new { @class = "form-control", placeholder = "Local", @readonly = "readonly" })
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="" class=" col-form-label">@Html.LabelFor(x => x.CodeVoucher)<span class="text-danger">*</span></label>
+                @Html.TextBoxFor(x => x.CodeVoucher, new { @class = "form-control", placeholder = "Comprobante", @readonly = "readonly" })      
+            </div>
+            <div class="col-md-12 mb-3">
+                <label for="" class="col-form-label">@Html.LabelFor(x => x.NameUser)<span class="text-danger">*</span></label>
+                @Html.TextBoxFor(x => x.NameUser, new { @class = "form-control", placeholder = "Usuario", @readonly = "readonly" })
+            </div>
+            <div class="col-md-12 mb-3">
+                @Html.HiddenFor(x => x.CustomerIdHidden, new { @class = "customer" })
+                <label for="" class="col-form-label">@Html.LabelFor(x => x.CustomerId)<span class="text-danger">*</span></label>
+                @Html.DropDownListFor(x => x.CustomerId, new SelectList(Model.LstCustomer, "CustomerId", "Name"), "Cliente", new { @class = "customerSelect col-md-12", style="border:red" })
+                <label class="validationcustomer" style="color:red" hidden="hidden">Es obligatorio completar el campo cliente</label>
+            </div>
+            <div class="col-md-6 mb-3">
+                <a class="btn btn-success btn-rounded" data-add-detalle="data-add-detalle" style="margin-top: 30px;"><i class="mdi mdi-plus-circle mr-2" style="color:white"></i><label style="color:white;margin-bottom:0px"> Agregar detalle</label></a>
+            </div>
+            <div class="col-md-12 mb-3">
+                <div class="table-responsive">
+                    <table class="table mb-0" id="tblSale">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th style="width:30%"><label style="color:white">Producto</label></th>
+                                <th style="width:10%"><label style="color:white">Cantidad Disponible</label></th>
+                                <th style="width:15%"><label style="color:white">Cantidad</label></th>
+                                <th style="width:15%"><label style="color:white">Precio Unitario</label></th>
+                                <th style="width:20%"><label style="color:white">Importe</label></th>
+                                <th style="width:10%"><label style="color:white">Opciones</label></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblDetail">
+                            @if (Model.SaleId.HasValue)
+                            {
+                                var index = 1;
+                                foreach (var item in Model.LstSaleDetail)
+                                {
+                            <tr class="detailSale">
+                                <td><select class="form-control" data-product="data-product" name="product-@index" placeholder="producto" value="@item.ProductBrandId"></select></td>
+                                <td><label class="quantityDisponible" style="margin-top:10px"></label></td>
+                                <td><input class="form-control onlyNumbers" data-quantity="data-quantity" name="quantity-@index" placeholder="cantidad" value="@item.Amount" /></td>
+                                <td><input class="form-control onlyNumberDecimal" data-unitprice="data-unitprice" name="unitprice-@index" placeholder="precio unitario" value="@item.Price" /></td>
+                                <td><input class="form-control onlyNumberDecimal" data-import="data-import" name="import-@index" placeholder="importe" disabled="disabled" value="@item.Total" /></td>
+                                <td><a class="btn removerow"><i class="fa fa-trash"></i></a></td>
+                            </tr>
+                                    index++;
+                                }
+                            }
+                            else
+                            {
+                            <tr class="detailSale">
+                                <td><select class="form-control" data-product="data-product" name="product-1" placeholder="producto" value=""></select></td>
+                                <td><label class="quantityDisponible" style="margin-top:10px">0</label></td>
+                                <td><input class="form-control onlyNumbers" data-quantity="data-quantity" name="quantity-1" placeholder="cantidad" /></td>
+                                <td><input class="form-control onlyNumberDecimal" data-unitprice="data-unitprice" name="unitprice-1" placeholder="precio unitario" /></td>
+                                <td><input class="form-control onlyNumberDecimal" data-import="data-import" name="import-1" placeholder="importe" disabled="disabled" value="0.0000" /></td>
+                                <td><a class="btn removerow"><i class="fa fa-trash"></i></a></td>
+                            </tr>
+                            }
+                            <tr class="totalImport">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td align="center"><label>Total : </label></td>
+                                <td>S/. <label class="totalImportGeneral"></label></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @*</form>*@
+        </div>
+    </div>
+</div>
+
+
+
+@section Footer{
+    <button class="btn btn-success btn-xs" type="submit" id="btnSubmit"><i class="fe-save" ></i> Guardar</button>
+}
+
+@section Scripts{
+    <script>
+        var customerSelect2 = null;
+
+
+        $('.customerSelect').on('select2:select', function (e) {
+            $('.validationcustomer').prop('hidden', 'hidden');
+        });
+     
+        
+        function binDetailSale($item) {
+            //let productSelect2 = $item.find('.selectProduct');
+            $item.find('.removerow').on('click', function (e) {
+                var validation = $(this).closest('tbody').find('tr.detailSale').length;
+                debugger;
+                if (validation !== 1) {
+                    $(this).closest('tr').remove();
+                }
+                calcularImporteTotal();
+            });
+
+            $item.find('[data-product="data-product"]').select2({
+                placeholder: 'Producto',
+                allowClear: true,
+                dataType: 'json',
+                quietMillis: 100,
+                //minimumInputLength: 1,
+                ajax: {
+                    type: 'GET',
+                    url: '@Url.Action("_GetProduct", "Service")',
+                    data: function (params) {
+                        return { filtro: params.term };
+                    },
+                    processResults: function (data) {
+                        return { results: data };
+                    }
+
+                }
+            }); 
+
+            $item.find('[data-product="data-product"]').on('select2:select', function (e) {
+                
+                $quantity = $(e.target).closest('tr').find('.quantityDisponible'); 
+
+                var quantity = e.params.data.quantity;
+
+                if (quantity !== null) {
+                    $quantity.text(quantity);
+                } else
+                {
+                    $quantity.text(0);
+                }
+            });
+
+            $item.find('[data-product="data-product"]').on('select2:unselecting', function (e) {
+                
+                let $quantity = $(e.target).closest('tr').find('.quantityDisponible');
+                $quantity.text(0);
+            });
+
+            $item.find('[data-product="data-product"]').each(function (i, e) {
+                
+                var $prod = $(this);
+                var productId = $prod[0].attributes[4].value;
+                debugger;
+                var quantityDisponible = $prod.closest('tr').find('.quantityDisponible');
+                
+                if (productId > 0) {
+                    $.ajax({
+                        method: 'GET',
+                        url: '@Url.Action("_GetProduct", "Service")',
+                        dataType: 'json',
+                        data: { ProductId: productId },
+                    }).then(function (data) {
+                        let option = new Option(data[0].text, data[0].id, true, true);
+                        quantityDisponible.text(data[0].quantity);
+                        $prod.append(option).trigger('change');
+                        $prod.trigger({
+                            type: 'select2:select',
+                            params: {
+                                data: data
+                            }
+                        });
+                    });
+                }
+            });
+
+            $item.find('[data-quantity="data-quantity"]').on('change', function () {
+                let valuee = $(this).val();
+                let valueUnitPrice = $(this).closest('tr')[0].children[3].children[0].value;
+                let quantityDisponible = $(this).closest('tr')[0].children[1].children[0].innerHTML;
+
+                if (parseInt(quantityDisponible) < parseInt(valuee)) {
+                    
+                    Swal.fire({
+                        type: 'error',
+                        title: 'No cuenta con la cantidad de producto necesario para hacer la venta',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    $(this).val('');
+                } else {
+                    if (valuee !== "" && valueUnitPrice !== "") {
+                        let importe = parseFloat(valueUnitPrice) * parseInt(valuee);
+                        $(this).closest('tr')[0].children[4].children[0].value = parseFloat(importe).toFixed(4);
+                        calcularImporteTotal();
+                    } else {
+                        $(this).closest('tr')[0].children[4].children[0].value = parseFloat(0).toFixed(4);
+                        calcularImporteTotal();
+                    }
+                }
+            });
+
+            $item.find('[data-unitprice="data-unitprice"]').on('change', function () {
+                let valuee = $(this).val();
+                let valueQuantity = $(this).closest('tr')[0].children[2].children[0].value;
+                if (valuee !== "" && valueQuantity !== "") {
+                    let importe = parseFloat(valuee) * parseInt(valueQuantity);
+                    $(this).closest('tr')[0].children[4].children[0].value = parseFloat(importe).toFixed(4);
+                    calcularImporteTotal();
+                } else {
+                    $(this).closest('tr')[0].children[4].children[0].value = parseFloat(0).toFixed(4);
+                    calcularImporteTotal();
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            
+
+            binDetailSale($('#tblSale tbody tr'));
+
+            customerSelect2 = $('.customerSelect'); 
+            customerSelect2.select2({
+                placeholder: 'Cliente',
+                allowClear: true,
+                dataType: 'json',
+                quietMillis: 100,
+                //minimumInputLength: 1,
+                ajax: {
+                    url: '@Url.Action("_GetCustomer", "Service")',
+                    data: function (params) {
+                        return { filtro: params.term };
+                    },
+                    processResults: function (data) {
+                        return { results: data };
+                    }
+                }
+            });
+
+            if ($('.customer').val() != "") {
+                let customerId = $('.customer').val();
+                $.ajax({
+                    method: 'GET',
+                    url: '@Url.Action("_GetCustomer", "Service")',
+                    dataType: 'json',
+                    data: { CustomerId: customerId },
+                }).then(function (data) {
+                    let option = new Option(data[0].text, data[0].id, true, true);
+                    $('.customerSelect').append(option).trigger('change');
+                    $('.customerSelect').trigger({
+                        type: 'select2:select',
+                        params: {
+                            data: data
+                        }
+                    });
+                });
+            }
+
+            calcularImporteTotal();
+            $('.select2-container').prop('class', 'select2 select2-container select2-container--default select2-container--above');
+
+           
+        });
+
+        $('#btnSubmit').on('click', function (e) {
+            $('#CodeVoucher').removeAttr('disabled');
+            let listDetailSale = $('#tblSale > tbody > tr.detailSale');
+
+            let validation = true;
+
+            for (var i = 0; i < listDetailSale.length; i++) {
+                if (listDetailSale[i].children[0].children[0].value === "") {
+                    validation = false;
+                    break;
+                }
+                if (listDetailSale[i].children[2].children[0].value === "") {
+                    validation = false;
+                    break;
+                }
+                if (listDetailSale[i].children[3].children[0].value === "") {
+                    validation = false;
+                    break;
+                }
+            }
+            if (validation === false) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'No puede realizar la venta si no ha completado los campos correctamente',
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+                e.preventDefault();
+            } else {
+                
+                if ($('.customerSelect').val() === "") {
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Es necesario ingresar un usuario',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    $('.validationcustomer').removeAttr('hidden');
+                    e.preventDefault();
+                } else {
+                    $('#fmrs').off('submit').submit();
+                }
+            }
+        });
+
+        $('[data-add-detalle="data-add-detalle"]').on("click", function () {
+            let countRow = $('#tblDetail tr').length + 1;
+            let detalle = `<tr  class="detailSale">
+                                <td><select class="form-control" data-product="data-product" name="product-` + countRow + `" placeholder="producto"></select></td>
+                                <td><label class="quantityDisponible" style="margin-top:10px">0</label></td>
+                                <td><input class="form-control onlyNumbers" data-quantity="data-quantity" name="quantity-` + countRow +`" placeholder="cantidad" /></td>
+                                <td><input class="form-control onlyNumberDecimal" data-unitprice="data-unitprice" name="unitprice-` + countRow +`" placeholder="precio unitario"/></td>
+                                <td><input class="form-control onlyNumberDecimal" data-import="data-import" name="import-` + countRow +`" placeholder="importe" disabled="disabled" value="0.0000"/></td>
+                                <td><a class="btn removerow"><i class="fa fa-trash"></i></a></td>
+                            </tr>`;
+
+            $('.totalImport').before(detalle);     
+            binDetailSale($('#tblSale tbody tr'));
+            calcularImporteTotal();
+        });
+
+        function calcularImporteTotal() {
+            let total = 0.0;
+            $.each($('#tblDetail')[0].children, function (index, value) {
+                let data = value.children[4].children[0].value;
+                if (data !== "" && data !== undefined) {
+                    total += parseFloat(data);
+                    $('.totalImportGeneral').text(total.toFixed(4));
+                }
+            });
+        }
+    </script>
+}

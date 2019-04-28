@@ -1,0 +1,581 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SagrominModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="SagrominEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Address" EntityType="SagrominModel.Address" />
+    <EntitySet Name="Brand" EntityType="SagrominModel.Brand" />
+    <EntitySet Name="Customer" EntityType="SagrominModel.Customer" />
+    <EntitySet Name="Department" EntityType="SagrominModel.Department" />
+    <EntitySet Name="District" EntityType="SagrominModel.District" />
+    <EntitySet Name="EntryExitProduct" EntityType="SagrominModel.EntryExitProduct" />
+    <EntitySet Name="Local" EntityType="SagrominModel.Local" />
+    <EntitySet Name="Product" EntityType="SagrominModel.Product" />
+    <EntitySet Name="ProductBrand" EntityType="SagrominModel.ProductBrand" />
+    <EntitySet Name="Province" EntityType="SagrominModel.Province" />
+    <EntitySet Name="Sale" EntityType="SagrominModel.Sale" />
+    <EntitySet Name="SaleDetail" EntityType="SagrominModel.SaleDetail" />
+    <EntitySet Name="SalePay" EntityType="SagrominModel.SalePay" />
+    <EntitySet Name="StockProduct" EntityType="SagrominModel.StockProduct" />
+    <EntitySet Name="sysdiagrams" EntityType="SagrominModel.sysdiagrams" />
+    <EntitySet Name="User" EntityType="SagrominModel.User" />
+    <AssociationSet Name="FK_Customer_Address" Association="SagrominModel.FK_Customer_Address">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Address" Association="SagrominModel.FK_User_Address">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductBrand_Brand" Association="SagrominModel.FK_ProductBrand_Brand">
+      <End Role="Brand" EntitySet="Brand" />
+      <End Role="ProductBrand" EntitySet="ProductBrand" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_District" Association="SagrominModel.FK_Customer_District">
+      <End Role="District" EntitySet="District" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sale_Customer1" Association="SagrominModel.FK_Sale_Customer1">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Sale" EntitySet="Sale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Province_Department" Association="SagrominModel.FK_Province_Department">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Province" EntitySet="Province" />
+    </AssociationSet>
+    <AssociationSet Name="FK_District_Province" Association="SagrominModel.FK_District_Province">
+      <End Role="Province" EntitySet="Province" />
+      <End Role="District" EntitySet="District" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Local_District" Association="SagrominModel.FK_Local_District">
+      <End Role="District" EntitySet="District" />
+      <End Role="Local" EntitySet="Local" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_District" Association="SagrominModel.FK_User_District">
+      <End Role="District" EntitySet="District" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntryExitProduct_ProductBrand" Association="SagrominModel.FK_EntryExitProduct_ProductBrand">
+      <End Role="ProductBrand" EntitySet="ProductBrand" />
+      <End Role="EntryExitProduct" EntitySet="EntryExitProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntryExitProduct_Sale" Association="SagrominModel.FK_EntryExitProduct_Sale">
+      <End Role="Sale" EntitySet="Sale" />
+      <End Role="EntryExitProduct" EntitySet="EntryExitProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntryExitProduct_User" Association="SagrominModel.FK_EntryExitProduct_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="EntryExitProduct" EntitySet="EntryExitProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sale_Local1" Association="SagrominModel.FK_Sale_Local1">
+      <End Role="Local" EntitySet="Local" />
+      <End Role="Sale" EntitySet="Sale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Local" Association="SagrominModel.FK_User_Local">
+      <End Role="Local" EntitySet="Local" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductBrand_Product" Association="SagrominModel.FK_ProductBrand_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ProductBrand" EntitySet="ProductBrand" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SaleDetail_ProductBrand" Association="SagrominModel.FK_SaleDetail_ProductBrand">
+      <End Role="ProductBrand" EntitySet="ProductBrand" />
+      <End Role="SaleDetail" EntitySet="SaleDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockProduct_ProductBrand" Association="SagrominModel.FK_StockProduct_ProductBrand">
+      <End Role="ProductBrand" EntitySet="ProductBrand" />
+      <End Role="StockProduct" EntitySet="StockProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sale_User1" Association="SagrominModel.FK_Sale_User1">
+      <End Role="User" EntitySet="User" />
+      <End Role="Sale" EntitySet="Sale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SaleDetail_Sale1" Association="SagrominModel.FK_SaleDetail_Sale1">
+      <End Role="Sale" EntitySet="Sale" />
+      <End Role="SaleDetail" EntitySet="SaleDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalePay_Sale1" Association="SagrominModel.FK_SalePay_Sale1">
+      <End Role="Sale" EntitySet="Sale" />
+      <End Role="SalePay" EntitySet="SalePay" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalePay_User" Association="SagrominModel.FK_SalePay_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="SalePay" EntitySet="SalePay" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="AddressId" />
+    </Key>
+    <Property Name="AddressId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Department" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Province" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="District" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Town" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Customer" Relationship="SagrominModel.FK_Customer_Address" FromRole="Address" ToRole="Customer" />
+    <NavigationProperty Name="User" Relationship="SagrominModel.FK_User_Address" FromRole="Address" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Brand">
+    <Key>
+      <PropertyRef Name="BrandId" />
+    </Key>
+    <Property Name="BrandId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ProductBrand" Relationship="SagrominModel.FK_ProductBrand_Brand" FromRole="Brand" ToRole="ProductBrand" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Names" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Last_Names" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Sex" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Identity_Document" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Birthdate" Type="DateTime" Precision="3" />
+    <Property Name="Creation_Date" Type="DateTime" Precision="3" />
+    <Property Name="Update_Date" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="DistrictId" Type="Int32" />
+    <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Address" Relationship="SagrominModel.FK_Customer_Address" FromRole="Customer" ToRole="Address" />
+    <NavigationProperty Name="District" Relationship="SagrominModel.FK_Customer_District" FromRole="Customer" ToRole="District" />
+    <NavigationProperty Name="Sale" Relationship="SagrominModel.FK_Sale_Customer1" FromRole="Customer" ToRole="Sale" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepartmentId" />
+    </Key>
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="HcKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Province" Relationship="SagrominModel.FK_Province_Department" FromRole="Department" ToRole="Province" />
+  </EntityType>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="DistrictId" />
+    </Key>
+    <Property Name="DistrictId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ProvinceId" Type="Int32" />
+    <NavigationProperty Name="Customer" Relationship="SagrominModel.FK_Customer_District" FromRole="District" ToRole="Customer" />
+    <NavigationProperty Name="Province" Relationship="SagrominModel.FK_District_Province" FromRole="District" ToRole="Province" />
+    <NavigationProperty Name="Local" Relationship="SagrominModel.FK_Local_District" FromRole="District" ToRole="Local" />
+    <NavigationProperty Name="User" Relationship="SagrominModel.FK_User_District" FromRole="District" ToRole="User" />
+  </EntityType>
+  <EntityType Name="EntryExitProduct">
+    <Key>
+      <PropertyRef Name="EntryExitProductId" />
+    </Key>
+    <Property Name="EntryExitProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="Creation_Date" Type="DateTime" Precision="3" />
+    <Property Name="StatusType" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="ProductBrandId" Type="Int32" />
+    <Property Name="SaleId" Type="Int32" />
+    <NavigationProperty Name="ProductBrand" Relationship="SagrominModel.FK_EntryExitProduct_ProductBrand" FromRole="EntryExitProduct" ToRole="ProductBrand" />
+    <NavigationProperty Name="Sale" Relationship="SagrominModel.FK_EntryExitProduct_Sale" FromRole="EntryExitProduct" ToRole="Sale" />
+    <NavigationProperty Name="User" Relationship="SagrominModel.FK_EntryExitProduct_User" FromRole="EntryExitProduct" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Local">
+    <Key>
+      <PropertyRef Name="LocalId" />
+    </Key>
+    <Property Name="LocalId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DistrictId" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="District" Relationship="SagrominModel.FK_Local_District" FromRole="Local" ToRole="District" />
+    <NavigationProperty Name="Sale" Relationship="SagrominModel.FK_Sale_Local1" FromRole="Local" ToRole="Sale" />
+    <NavigationProperty Name="User" Relationship="SagrominModel.FK_User_Local" FromRole="Local" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Creation_Date" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ProductBrand" Relationship="SagrominModel.FK_ProductBrand_Product" FromRole="Product" ToRole="ProductBrand" />
+  </EntityType>
+  <EntityType Name="ProductBrand">
+    <Key>
+      <PropertyRef Name="ProductBrandId" />
+    </Key>
+    <Property Name="ProductBrandId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductId" Type="Int32" />
+    <Property Name="BrandId" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Brand" Relationship="SagrominModel.FK_ProductBrand_Brand" FromRole="ProductBrand" ToRole="Brand" />
+    <NavigationProperty Name="EntryExitProduct" Relationship="SagrominModel.FK_EntryExitProduct_ProductBrand" FromRole="ProductBrand" ToRole="EntryExitProduct" />
+    <NavigationProperty Name="Product" Relationship="SagrominModel.FK_ProductBrand_Product" FromRole="ProductBrand" ToRole="Product" />
+    <NavigationProperty Name="SaleDetail" Relationship="SagrominModel.FK_SaleDetail_ProductBrand" FromRole="ProductBrand" ToRole="SaleDetail" />
+    <NavigationProperty Name="StockProduct" Relationship="SagrominModel.FK_StockProduct_ProductBrand" FromRole="ProductBrand" ToRole="StockProduct" />
+  </EntityType>
+  <EntityType Name="Province">
+    <Key>
+      <PropertyRef Name="ProvinceId" />
+    </Key>
+    <Property Name="ProvinceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DepartmentId" Type="Int32" />
+    <NavigationProperty Name="Department" Relationship="SagrominModel.FK_Province_Department" FromRole="Province" ToRole="Department" />
+    <NavigationProperty Name="District" Relationship="SagrominModel.FK_District_Province" FromRole="Province" ToRole="District" />
+  </EntityType>
+  <EntityType Name="Sale">
+    <Key>
+      <PropertyRef Name="SaleId" />
+    </Key>
+    <Property Name="SaleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="General_Price" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="Creation_Date" Type="DateTime" Precision="3" />
+    <Property Name="CustomerId" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="LocalId" Type="Int32" />
+    <Property Name="Update_Date" Type="DateTime" Precision="3" />
+    <Property Name="CodeVoucher" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StatusPayment" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="StatusDelivery" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Customer" Relationship="SagrominModel.FK_Sale_Customer1" FromRole="Sale" ToRole="Customer" />
+    <NavigationProperty Name="EntryExitProduct" Relationship="SagrominModel.FK_EntryExitProduct_Sale" FromRole="Sale" ToRole="EntryExitProduct" />
+    <NavigationProperty Name="Local" Relationship="SagrominModel.FK_Sale_Local1" FromRole="Sale" ToRole="Local" />
+    <NavigationProperty Name="User" Relationship="SagrominModel.FK_Sale_User1" FromRole="Sale" ToRole="User" />
+    <NavigationProperty Name="SaleDetail" Relationship="SagrominModel.FK_SaleDetail_Sale1" FromRole="Sale" ToRole="SaleDetail" />
+    <NavigationProperty Name="SalePay" Relationship="SagrominModel.FK_SalePay_Sale1" FromRole="Sale" ToRole="SalePay" />
+  </EntityType>
+  <EntityType Name="SaleDetail">
+    <Key>
+      <PropertyRef Name="SaleDetailId" />
+    </Key>
+    <Property Name="SaleDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="Status" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="SaleId" Type="Int32" />
+    <Property Name="ProductBrandId" Type="Int32" />
+    <Property Name="Total" Type="Decimal" Precision="18" Scale="4" />
+    <NavigationProperty Name="ProductBrand" Relationship="SagrominModel.FK_SaleDetail_ProductBrand" FromRole="SaleDetail" ToRole="ProductBrand" />
+    <NavigationProperty Name="Sale" Relationship="SagrominModel.FK_SaleDetail_Sale1" FromRole="SaleDetail" ToRole="Sale" />
+  </EntityType>
+  <EntityType Name="SalePay">
+    <Key>
+      <PropertyRef Name="SalePayId" />
+    </Key>
+    <Property Name="SalePayId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AmontMissing" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="AmontPay" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="Create_date" Type="DateTime" Precision="3" />
+    <Property Name="Update_date" Type="DateTime" Precision="3" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="SaleId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="Sale" Relationship="SagrominModel.FK_SalePay_Sale1" FromRole="SalePay" ToRole="Sale" />
+    <NavigationProperty Name="User" Relationship="SagrominModel.FK_SalePay_User" FromRole="SalePay" ToRole="User" />
+  </EntityType>
+  <EntityType Name="StockProduct">
+    <Key>
+      <PropertyRef Name="StockProductId" />
+    </Key>
+    <Property Name="StockProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="ProductBrandId" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ProductBrand" Relationship="SagrominModel.FK_StockProduct_ProductBrand" FromRole="StockProduct" ToRole="ProductBrand" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Names" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Last_Names" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Credential" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Sex" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Identity_Document" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Birthdate" Type="DateTime" Precision="3" />
+    <Property Name="Creation_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Update_date" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="Master" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="LocalId" Type="Int32" Nullable="false" />
+    <Property Name="DistrictId" Type="Int32" />
+    <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Address" Relationship="SagrominModel.FK_User_Address" FromRole="User" ToRole="Address" />
+    <NavigationProperty Name="District" Relationship="SagrominModel.FK_User_District" FromRole="User" ToRole="District" />
+    <NavigationProperty Name="EntryExitProduct" Relationship="SagrominModel.FK_EntryExitProduct_User" FromRole="User" ToRole="EntryExitProduct" />
+    <NavigationProperty Name="Local" Relationship="SagrominModel.FK_User_Local" FromRole="User" ToRole="Local" />
+    <NavigationProperty Name="Sale" Relationship="SagrominModel.FK_Sale_User1" FromRole="User" ToRole="Sale" />
+    <NavigationProperty Name="SalePay" Relationship="SagrominModel.FK_SalePay_User" FromRole="User" ToRole="SalePay" />
+  </EntityType>
+  <Association Name="FK_Customer_Address">
+    <End Type="SagrominModel.Address" Role="Address" Multiplicity="0..1" />
+    <End Type="SagrominModel.Customer" Role="Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressId" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="DistrictId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Address">
+    <End Type="SagrominModel.Address" Role="Address" Multiplicity="0..1" />
+    <End Type="SagrominModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="DistrictId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductBrand_Brand">
+    <End Type="SagrominModel.Brand" Role="Brand" Multiplicity="0..1" />
+    <End Type="SagrominModel.ProductBrand" Role="ProductBrand" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="BrandId" />
+      </Principal>
+      <Dependent Role="ProductBrand">
+        <PropertyRef Name="BrandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_District">
+    <End Type="SagrominModel.District" Role="District" Multiplicity="0..1" />
+    <End Type="SagrominModel.Customer" Role="Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="DistrictId" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="DistrictId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sale_Customer1">
+    <End Type="SagrominModel.Customer" Role="Customer" Multiplicity="0..1" />
+    <End Type="SagrominModel.Sale" Role="Sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="Sale">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Province_Department">
+    <End Type="SagrominModel.Department" Role="Department" Multiplicity="0..1" />
+    <End Type="SagrominModel.Province" Role="Province" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="Province">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_District_Province">
+    <End Type="SagrominModel.Province" Role="Province" Multiplicity="0..1" />
+    <End Type="SagrominModel.District" Role="District" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="ProvinceId" />
+      </Principal>
+      <Dependent Role="District">
+        <PropertyRef Name="ProvinceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Local_District">
+    <End Type="SagrominModel.District" Role="District" Multiplicity="0..1" />
+    <End Type="SagrominModel.Local" Role="Local" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="DistrictId" />
+      </Principal>
+      <Dependent Role="Local">
+        <PropertyRef Name="DistrictId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_District">
+    <End Type="SagrominModel.District" Role="District" Multiplicity="0..1" />
+    <End Type="SagrominModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="DistrictId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="DistrictId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntryExitProduct_ProductBrand">
+    <End Type="SagrominModel.ProductBrand" Role="ProductBrand" Multiplicity="0..1" />
+    <End Type="SagrominModel.EntryExitProduct" Role="EntryExitProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductBrand">
+        <PropertyRef Name="ProductBrandId" />
+      </Principal>
+      <Dependent Role="EntryExitProduct">
+        <PropertyRef Name="ProductBrandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntryExitProduct_Sale">
+    <End Type="SagrominModel.Sale" Role="Sale" Multiplicity="0..1" />
+    <End Type="SagrominModel.EntryExitProduct" Role="EntryExitProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sale">
+        <PropertyRef Name="SaleId" />
+      </Principal>
+      <Dependent Role="EntryExitProduct">
+        <PropertyRef Name="SaleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntryExitProduct_User">
+    <End Type="SagrominModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="SagrominModel.EntryExitProduct" Role="EntryExitProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="EntryExitProduct">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sale_Local1">
+    <End Type="SagrominModel.Local" Role="Local" Multiplicity="0..1" />
+    <End Type="SagrominModel.Sale" Role="Sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Local">
+        <PropertyRef Name="LocalId" />
+      </Principal>
+      <Dependent Role="Sale">
+        <PropertyRef Name="LocalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Local">
+    <End Type="SagrominModel.Local" Role="Local" Multiplicity="1" />
+    <End Type="SagrominModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Local">
+        <PropertyRef Name="LocalId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="LocalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductBrand_Product">
+    <End Type="SagrominModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="SagrominModel.ProductBrand" Role="ProductBrand" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="ProductBrand">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SaleDetail_ProductBrand">
+    <End Type="SagrominModel.ProductBrand" Role="ProductBrand" Multiplicity="0..1" />
+    <End Type="SagrominModel.SaleDetail" Role="SaleDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductBrand">
+        <PropertyRef Name="ProductBrandId" />
+      </Principal>
+      <Dependent Role="SaleDetail">
+        <PropertyRef Name="ProductBrandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockProduct_ProductBrand">
+    <End Type="SagrominModel.ProductBrand" Role="ProductBrand" Multiplicity="0..1" />
+    <End Type="SagrominModel.StockProduct" Role="StockProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductBrand">
+        <PropertyRef Name="ProductBrandId" />
+      </Principal>
+      <Dependent Role="StockProduct">
+        <PropertyRef Name="ProductBrandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sale_User1">
+    <End Type="SagrominModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="SagrominModel.Sale" Role="Sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Sale">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SaleDetail_Sale1">
+    <End Type="SagrominModel.Sale" Role="Sale" Multiplicity="0..1" />
+    <End Type="SagrominModel.SaleDetail" Role="SaleDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sale">
+        <PropertyRef Name="SaleId" />
+      </Principal>
+      <Dependent Role="SaleDetail">
+        <PropertyRef Name="SaleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalePay_Sale1">
+    <End Type="SagrominModel.Sale" Role="Sale" Multiplicity="0..1" />
+    <End Type="SagrominModel.SalePay" Role="SalePay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sale">
+        <PropertyRef Name="SaleId" />
+      </Principal>
+      <Dependent Role="SalePay">
+        <PropertyRef Name="SaleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalePay_User">
+    <End Type="SagrominModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="SagrominModel.SalePay" Role="SalePay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="SalePay">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

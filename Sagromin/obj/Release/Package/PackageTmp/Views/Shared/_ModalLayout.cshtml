@@ -1,0 +1,126 @@
+﻿@{
+
+    ViewBag.GUID = ViewBag.GUID ?? Guid.NewGuid().ToString();
+
+    var hasModalForm = ViewBag.Form != null && ViewBag.Form is ModalFormHelpers;
+    var hasAjaxModalForm = ViewBag.Form != null && ViewBag.Form is ModalAjaxFormHelpers;
+
+    if (hasAjaxModalForm && String.IsNullOrEmpty(ViewBag.Form.AjaxOptions.UpdateTargetId))
+    {
+        ViewBag.Form.AjaxOptions.UpdateTargetId = ViewBag.GUID;
+    }
+}
+
+@RenderSection("Styles", false)
+
+<div id="@ViewBag.GUID">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myLargeModalLabel"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><i class="@ViewBag.ModalIcon"></i> @ViewBag.Title</font></font></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    </div>
+
+    @if (hasModalForm)
+    {
+        <text>@{ViewBag.Form.BeginForm(Html);}</text>
+    }
+    else if (hasAjaxModalForm)
+    {
+        <text>@{ViewBag.Form.BeginForm(Ajax);}</text>
+    }
+
+    <div class="modal-body">
+        @RenderBody()
+    </div>
+
+    <div class="modal-footer">
+        @if (ViewBag.DeshabilitarCerrarFooter == null || !ViewBag.DeshabilitarCerrarFooter)
+        {
+            <button type="button" class="btn btn-inverse btn-xs" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
+        }
+        @RenderSection("Footer", false)
+    </div>
+
+    @if (ViewBag.Form != null || ViewBag.AjaxForm != null)
+    {
+        Html.EndForm();
+    }
+</div>
+
+<script id="rebind-jquery-@ViewBag.GUID">
+    RebindJquery($('#rebind-jquery-@ViewBag.GUID').closest('.modal'));
+</script>
+
+@if (ViewBag.ModalDialogClass != null)
+{
+    <script id="modal-dialog-class-@ViewBag.GUID">
+        $('#@ViewBag.GUID').closest('.modal-dialog').addClass('@ViewBag.ModalDialogClass');
+    </script>
+}
+
+@if (ViewBag.ModalClass != null)
+{
+    <script id="modal-class-@ViewBag.GUID">
+        $('#@ViewBag.GUID').closest('.modal').prop('@ViewBag.ModalClass');
+
+    </script>
+}
+@if (ViewBag.ModalSize != null)
+{
+    <script>
+        $('.modal-dialog').prop('class' , 'modal-dialog modal-@ViewBag.ModalSize');
+    </script>
+}
+
+@RenderSection("Scripts", false)
+
+<script>
+    $('.calendar').flatpickr({
+        dateFormat: "d-m-Y",
+        locale: {
+            firstDayOfWeek: 1,
+            weekdays: {
+                shorthand: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+                longhand: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            },
+            months: {
+                shorthand: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Оct', 'Nov', 'Dic'],
+                longhand: ['Enero', 'Febreo', 'Мarzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            },
+        },
+    });
+</script>
+<script>
+
+    $('[data-type="cascade-dropdown-list"]').on('change', function (e) {
+
+        // Url de datos json
+        var sourceUrl = $(this).attr('data-source-url');
+
+        // Nombre del parámetro de filtro
+        var dataFilter = $(this).attr('data-filter');
+
+        // Valor seleccionado
+        var selectedId = $(this).val();
+
+        // Select a actualizar
+        var updateTarget = $(this).attr('data-update-target');
+
+        var postData = {};
+        postData[dataFilter] = selectedId;
+        var $updateTarget = $(updateTarget);
+        $updateTarget.attr('disabled', 'disabled')
+        $updateTarget.find('option[value!=""]').remove();
+        $.post(sourceUrl, postData, function (data) {
+            var $updateTarget = $(updateTarget);
+            var valueMember = $updateTarget.attr('data-value-member')
+            var textMember = $updateTarget.attr('data-text-member')
+            for (i = 0; i < data.length; i++) {
+                $updateTarget.append($('<option>').text(data[i][textMember]).attr('value', data[i][valueMember]));
+            }
+            $updateTarget.removeAttr('disabled');
+            $updateTarget.trigger('change');
+        });
+    });
+
+</script>

@@ -1,0 +1,97 @@
+﻿@model Sagromin.ViewModels.Local.ListLocalViewModel
+
+@{
+    ViewBag.Section = "Local";
+    ViewBag.Title = "Lista de usuarios";
+    ViewBag.Icon = "fa fa-building";
+    var index = 1;
+}
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="card-box">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-box">
+            <h4 class="header-title">Locales</h4>
+            <p class="sub-header">
+                Lista de locales Sagromin.
+            </p>
+    
+            <div class="table-responsive">
+                <table class="table mb-0" id="tblLocal">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombres</th>
+                            <th>Direccion</th>
+                            <th>Celular/Teléfono</th>
+                            <th>Estado</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.LstLocal)
+                        {
+                        <tr class="@(index % 2 != 1 ? "" : "table-info") ">
+                            <th scope="row">@index</th>
+                            <td>@(item.Name == null ? "Anónimo" : item.Name)</td>
+                            <td>@(!item.DistrictId.HasValue ? "Anónimo" : item.District.Name)</td>
+                            <td>@(item.Phone == null ? "Anónimo" : item.Phone)</td>
+                            <td>@Html.Raw(ConstantHelpers.ESTADO.GetLabelEstado(item.Status))</td>
+                            <td>
+                                <a @Data.ModalLink("_AddEditLocal", "Local", new { LocalId = item.LocalId })><i class="fa fa-edit" style="color:dodgerblue"></i></a>&nbsp;
+                                <a class="delete" id="@item.LocalId"><i class="fa fa-trash" style="color:orangered"></i></a>
+                            </td>
+                        </tr>
+                            index++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mb-2">
+                <div class="row">
+                    <div class="col-12 text-sm-center form-inline">
+                        <div class="mr-2">
+                            <button @Data.ModalLink("_AddEditLocal", "Local") class="btn btn-success btn-rounded" style="margin-top: 30px;"><i class="mdi mdi-plus-circle mr-2"></i> Agregar Local</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $('#tblLocal').on('click', '.delete', function () {
+
+            Swal.fire({
+                type: 'info',
+                title: 'Eliminar local',
+                text: 'Esta seguro de eliminar el local seleccionado',
+                confirmButtonText: 'Si',
+                cancelButtonText: 'No',
+                showCancelButton: true,
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    debugger;
+                    let local_id = $(this)[0].attributes[1].nodeValue;
+                    ajaxDeleteObjectPostById('@Url.Action("_DeleteLocal", "Local")', local_id, 'Local');
+                }
+            })
+        });
+
+
+  
+
+
+    </script>
+}

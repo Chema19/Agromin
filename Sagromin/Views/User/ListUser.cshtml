@@ -1,0 +1,99 @@
+﻿@model Sagromin.ViewModels.User.ListUserViewModel
+
+@{
+    ViewBag.Section = "Usuario";
+    ViewBag.Title = "Lista de usuarios";
+    ViewBag.Icon = "fa fa-user";
+    var index = 1;
+}
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="card-box">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-box">
+            <h4 class="header-title">Usuarios</h4>
+            <p class="sub-header">
+                Lista de usuarios Sagromin.
+            </p>
+
+            <div class="table-responsive">
+                <table class="table mb-0" id="tbluser">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Celular</th>
+                            <th>Dni</th>
+                            <th>Correo Electrónico</th>
+                            <th>Estado</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.LstUser)
+                        {
+                            <tr class="@(index % 2 != 1 ? "" : "table-info") ">
+                                <th scope="row">@index</th>
+                                <td>@(item.Names == null ? "Anónimo" : item.Names)</td>
+                                <td>@(item.Last_Names == null ? "Anónimo" : item.Last_Names)</td>
+                                <td>@(item.Phone == null ? "Anónimo" : item.Phone)</td>
+                                <td>@(item.Identity_Document == null ? "Anónimo" : item.Identity_Document)</td>
+                                <td>@(item.Email == null ? "Anónimo" : item.Email)</td>
+                                <td>@Html.Raw(ConstantHelpers.ESTADO.GetLabelEstado(item.Status))</td>
+                                <td>
+                                    <a @Data.ModalLink("_AddEditUser", "User", new { UserId = item.UserId })><i class="fa fa-edit" style="color:dodgerblue"></i></a>&nbsp;
+                                    @if (item.Master != "M")
+                                    {
+                                    <a class="delete" id="@item.UserId"><i class="fa fa-trash" style="color:orangered"></i></a>
+                                    }
+                                </td>
+                            </tr>
+                            index++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mb-2">
+                <div class="row">
+                    <div class="col-12 text-sm-center form-inline">
+                        <div class="mr-2">
+                            <button @Data.ModalLink("_AddEditUser", "User") class="btn btn-success btn-rounded" style="margin-top: 30px;" ><i class="mdi mdi-plus-circle mr-2"></i> Agregar Usuario</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $('#tbluser').on('click', '.delete', function () {
+            
+            Swal.fire({
+                type: 'info',
+                title: 'Eliminar usuario',
+                text: 'Esta seguro de eliminar al usuario',
+                confirmButtonText: 'Si',
+                cancelButtonText: 'No',
+                showCancelButton: true,
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    var user_id = $(this)[0].attributes[1].nodeValue;
+                    ajaxDeleteObjectPostById('@Url.Action("_DeleteUser", "User")', user_id, 'Usuario');
+                }
+            })
+        });
+        
+    </script>
+    }

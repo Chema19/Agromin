@@ -1,0 +1,116 @@
+﻿@model Sagromin.ViewModels.ProductBrand.ListProductBrandViewModel
+
+@{
+    ViewBag.Section = "Marca Producto";
+    ViewBag.Title = "Lista de Marca Producto";
+    ViewBag.Icon = "fa fa-ProductBrand";
+    var index = 1;
+}
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="card-box">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-box">
+            <h4 class="header-title">Marca Producto</h4>
+            <p class="sub-header">
+                Lista de Marca Producto Sagromin.
+            </p>
+
+            <div class="table-responsive">
+                <table class="table mb-0" id="tblProductBrand">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Producto</th>
+                            <th>Marca</th>
+                            <th>Precio</th>
+                            <th>Estado</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.LstProductBrand)
+                        {
+                        <tr class="@(index % 2 != 1 ? "" : "table-info") ">
+                            <th scope="row">@index</th>
+                            <td>@item.Product.Name</td>
+                            <td>@item.Brand.Name</td>
+                            <td>@item.Price</td>
+                            <td>@Html.Raw(ConstantHelpers.ESTADO.GetLabelEstado(item.Status))</td>
+                            <td>
+                                <a @Data.ModalLink("_AddEditProductBrand", "ProductBrand", new { ProductBrandId = item.ProductBrandId })><i class="fa fa-edit" style="color:dodgerblue"></i></a>&nbsp;
+                                <a class="delete" id="@item.ProductBrandId"><i class="fa fa-trash" style="color:orangered"></i></a>
+                            </td>
+                        </tr>
+                            index++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mb-2">
+                <div class="row">
+                    <div class="col-12 text-sm-center form-inline">
+                        <div class="mr-2">
+                            <button @Data.ModalLink("_AddEditProductBrand", "ProductBrand") class="btn btn-success btn-rounded" style="margin-top: 30px;" ><i class="mdi mdi-plus-circle mr-2"></i> Agregar Marca Producto</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $('#tblProductBrand').on('click', '.delete', function () {
+            
+            Swal.fire({
+                type: 'info',
+                title: 'Eliminar usuario',
+                text: 'Esta seguro de eliminar la marca producto',
+                confirmButtonText: 'Si',
+                cancelButtonText: 'No',
+                showCancelButton: true,
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    var ProductBrand_id = $(this)[0].attributes[1].nodeValue;
+                    $.ajax({
+                        url: '@Url.Action("_DeleteProductBrand", "ProductBrand")',
+                        method: 'POST',
+                        async: false,
+                        data: { Id: ProductBrand_id },
+                        success: function (data) {
+                            debugger;
+                            if (data.validacion) {
+                                Swal.fire({
+                                    type: 'success',
+                                    title: 'Marca Producto eliminado',
+                                    timer: 1500
+                                })
+                                setTimeout(function () {
+                                    location.reload();
+                                }, 2000);
+                            } else {
+                                Swal.fire({
+                                    type: 'error',
+                                    title: 'Marca Producto no eliminado por que aún cuenta con productos de este tipo',
+                                    timer: 1500
+                                })
+                            }
+                        }
+                    });
+                }
+            })
+        });
+        
+    </script>
+    }

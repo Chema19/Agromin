@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from coderthemes.com/ubold/layouts/light/pages-starter.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Dec 2018 15:19:14 GMT -->
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Soluciones Agromin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="@Url.Content("~/Content/assets/images/favicon.ico")">
+
+    <!-- App css -->
+    <link href="@Url.Content("~/Content/assets/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/assets/css/icons.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/assets/css/app.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/assets/libs/custombox/custombox.min.css")" rel="stylesheet" />
+
+    <!-- DATEPICKER-->
+    <link href="@Url.Content("~/Content/assets/libs/flatpickr/flatpickr.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/assets/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/assets/libs/clockpicker/bootstrap-clockpicker.min.css")" rel="stylesheet" />
+
+    <!-- SWEETALERT -->
+    <link href="@Url.Content("~/Content/assets/libs/sweetalert2/sweetalert2.min.css")" rel="stylesheet" />
+
+    <!-- FEATHEICON -->
+    <link href="@Url.Content("~/Content/assets/libs/feathericon/css/feathericon.css")" rel="stylesheet" />
+    @*<link href="@Url.Content("~/Content/assets/libs/feathericon/css/feathericon.min.css")" rel="stylesheet" />*@
+
+    <!--SELECT 2-->
+    @*<link href="@Url.Content("~/Content/assets/libs/select2/select2.min.css")" rel="stylesheet" />*@
+    @*<link href="@Url.Content("~/Content/css/select2.min.css")" rel="stylesheet" />*@
+    <link href="@Url.Content("~/Content/css/select2.css")" rel="stylesheet" />
+    @*<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />*@
+    @RenderSection("styles", required: false)
+</head>
+
+<body>
+    <style>
+        .content-page {
+            padding: 20px;
+            left: 20px !important;
+            right: 20px !important;
+            background-image: url('@Url.Content("~/Content/assets/images/megamenu-bg.png")');
+            background -position: right bottom;
+                        background-repeat: no-repeat;
+                    }
+    </style>
+    <!-- Begin page -->
+    <div id="wrapper">
+
+        @{ Html.RenderPartial("_Topbar");}
+        @{ Html.RenderPartial("_LeftSidebar");}
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="content-page">
+            <div class="content">
+
+                <!-- Start Content-->
+                <div class="container-fluid">
+                    @MessageHelpers.ShowMessages(TempData)
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Soluciones Agromin</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">@ViewBag.Section</a></li>
+                                        <li class="breadcrumb-item active">@ViewBag.Title</li>
+                                    </ol>
+                                </div>
+                                <h4 class="page-title"><i class="@ViewBag.Icon"></i> @ViewBag.Title</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+                    @RenderBody()
+                </div> <!-- container -->
+
+            </div> <!-- content -->
+            @{ Html.RenderPartial("_Footer");}
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+
+    </div>
+    <!-- END wrapper -->
+    @{ Html.RenderPartial("_RightSidebar");}
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+
+    <!-- Vendor js -->
+    <script src="@Url.Content("~/Content/assets/js/vendor.min.js")"></script>
+
+    <!-- App js -->
+    <script src="@Url.Content("~/Content/assets/js/app.min.js")"></script>
+    <script src="@Url.Content("~/Content/assets/libs/custombox/custombox.min.js")"></script>
+
+    <!-- DATEPICKER -->
+    <script src="@Url.Content("~/Content/assets/libs/flatpickr/flatpickr.min.js")"></script>
+    <script src="@Url.Content("~/Content/assets/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.js")"></script>
+    <script src="@Url.Content("~/Content/assets/libs/clockpicker/bootstrap-clockpicker.min.js")"></script>
+    <script src="@Url.Content("~/Content/assets/js/pages/form-pickers.init.js")"></script>
+
+    <!-- SWEETALERT -->
+    <script src="@Url.Content("~/Content/assets/libs/sweetalert2/sweetalert2.min.js")"></script>
+
+    <!-- FEATHEICON -->
+    <script src="@Url.Content("~/Content/assets/libs/feathericon/tests/index.js")"></script>
+
+    <!--SELECT 2-->
+    @*<script src="@Url.Content("~/Content/assets/libs/select2/select2.min.js")"></script>*@
+    @*<script src="@Url.Content("~/Scripts/select2.min.js")"></script>*@
+    <script src="~/Scripts/select2.js"></script>
+    @RazorHelpers.Script("Pages/Helpers/GlobalHelps.js", Url)
+    <script src="@Url.Content("~/Scripts/Pages/Helpers/JsInputValidationHelpers.js")"></script>
+    @RazorHelpers.Script("Pages/Shared/Global.js", Url)
+    @RenderSection("scripts", required: false)
+
+    <div class="row-fluid" id="default-modal-container">
+        <div class="hide" id="default-modal-loading" hidden="hidden">
+            <div class="modal-body">
+                <h3>
+                    <i class="fa fa-cog fa-spin fa-1x fa-fw"></i> Cargando...
+                </h3>
+            </div>
+        </div>
+        <div class="hide" id="default-modal-loading-error" hidden="hidden">
+            <div class="modal-body">
+                <h3>
+                    <i class="fa fa-exclamation-triangle"></i> Ha ocurrido un error
+                </h3>
+            </div>
+        </div>
+    </div>
+
+    <script>
+                        //$('.select2').select2();
+    </script>
+
+</body>
+</html>

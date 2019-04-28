@@ -1,0 +1,49 @@
+﻿@helper ShowMessages(System.Web.Mvc.TempDataDictionary TempData, String customStyle = "")
+{
+
+List<Sagromin.Helpers.FlashMessage> messages = (List<Sagromin.Helpers.FlashMessage>)TempData["FlashMessages"];
+
+if (messages != null)
+{
+        @*<div class="row-fluid">*@
+foreach (var message in messages)
+{
+    var alert_class = String.Empty;
+    var alert_btn_class = String.Empty;
+    var icon_class = String.Empty;
+
+    switch (message.Type)
+    {
+        case Sagromin.Helpers.MessageType.Error: alert_class = "alert-danger"; alert_btn_class = "btn-danger"; icon_class = "fa-times-circle"; break;
+        case Sagromin.Helpers.MessageType.Info: alert_class = "alert-info"; alert_btn_class = "btn-info"; icon_class = "fa-info-circle"; break;
+        case Sagromin.Helpers.MessageType.Warning: alert_class = "alert-warning"; alert_btn_class = "btn-warning"; icon_class = "fa-exclamation-circle"; break;
+        case Sagromin.Helpers.MessageType.Success: alert_class = "alert-success"; alert_btn_class = "btn-success"; icon_class = "fa-check-circle"; break;
+    }
+    <div class="alert @(!message.Inline ? "alert-block" : String.Empty) @alert_class alert-dismissable" style="@customStyle">
+        <a class="close" data-dismiss="alert" href="#">&times;</a>
+
+        @if (!message.Inline)
+        {
+            <h4><i class='fa @icon_class'></i> @(message.Title)</h4>
+            <p>@(message.Body)</p>
+        }
+
+        @if (message.Inline)
+        {
+            <i class='fa @icon_class'></i> <strong>@(message.Title)</strong> @(message.Body)
+        }
+
+        @if (message.Actions != null && message.Actions.Count > 0)
+        {
+            <p>
+                @foreach (var action in message.Actions)
+                {
+                    <a class="btn @(message.Actions.First() == action?alert_btn_class:"")" href="@action.Action">@action.Text</a>
+                }
+            </p>
+        }
+    </div>
+}
+    @*</div>*@
+}
+}

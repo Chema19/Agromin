@@ -1,0 +1,92 @@
+﻿@model Sagromin.ViewModels.StockProduct.ListStockProductViewModel
+
+@{
+    ViewBag.Section = "Stock Producto";
+    ViewBag.Title = "Lista Stock de productos";
+    ViewBag.Icon = "fab fa-StockProduct-hunt";
+    var index = 1;
+}
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="card-box">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-box">
+            <h4 class="header-title">Stock Producto</h4>
+            <p class="sub-header">
+                Lista de Stock Producto Sagromin.
+            </p>
+
+            <div class="table-responsive">
+                <table class="table mb-0" id="tblStockProduct">
+                    <thead>
+                        <tr>
+                            <th width="16.6%">#</th>
+                            <th width="16.6%">Nombres Producto</th>
+                            <th width="16.6%">Marca Producto</th>
+                            <th width="16.6%">Stock</th>
+                            <th width="16.6%">Estado</th>
+                            <th width="16.6%">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.LstStockProduct)
+                        {
+                        <tr class="@(index % 2 != 1 ? "" : "table-info") ">
+                            <th scope="row">@index</th>
+                            <td>@item.ProductBrand.Product.Name</td>
+                            <td>@item.ProductBrand.Brand.Name</td>
+                            <td>@item.Amount</td>
+                            <td>@Html.Raw(ConstantHelpers.ESTADO.GetLabelEstado(item.Status))</td>
+                            <td>
+                                <a @Data.ModalLink("", "", new { StockProductId = item.StockProductId })><i class="fa fa-eye" style="color:dodgerblue"></i></a>&nbsp;&nbsp;
+                                @*<a class="delete" id="@item.StockProductId"><i class="fa fa-trash" style="color:orangered"></i></a>&nbsp;&nbsp;*@
+                                <a href="@Url.Action("ListEntryExitProduct","StockProduct",new { ProductBrandId = item.ProductBrandId })" class="" id="@item.StockProductId"><i class="fa fa-list" style="color:forestgreen"></i></a>
+                            </td>
+                        </tr>
+                            index++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mb-2">
+                <div class="row">
+                    <div class="col-12 text-sm-center form-inline">
+                        <div class="mr-2">
+                            <button @Data.ModalLink("_AddEditEntryExitProduct", "StockProduct") class="btn btn-success btn-rounded" style="margin-top: 30px;"><i class="mdi mdi-plus-circle mr-2"></i> Agregar Stock de producto </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $('#tblStockProduct').on('click', '.delete', function () {
+            Swal.fire({
+                type: 'info',
+                title: 'Eliminar StockProducto',
+                text: 'Esta seguro de eliminar el Stock Producto',
+                confirmButtonText: 'Si',
+                cancelButtonText: 'No',
+                showCancelButton: true,
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    var StockProduct_id = $(this)[0].attributes[1].nodeValue;
+                    ajaxDeleteObjectPostById('@Url.Action("_DeleteStockProduct", "StockProduct")', StockProduct_id, 'Stock Producto');
+                }
+            })
+        });
+
+    </script>
+}

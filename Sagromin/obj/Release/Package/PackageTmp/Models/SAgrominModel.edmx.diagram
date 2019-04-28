@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8a3ad4a4d8ac4425afe0ed4a62fe17c3" Name="Diagram1">
+        <EntityTypeShape EntityType="SagrominModel.Address" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SagrominModel.Brand" Width="1.5" PointX="6" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SagrominModel.Customer" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SagrominModel.Department" Width="1.5" PointX="1.5" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SagrominModel.District" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SagrominModel.EntryExitProduct" Width="1.5" PointX="10.5" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SagrominModel.Local" Width="1.5" PointX="6" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SagrominModel.Product" Width="1.5" PointX="6" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SagrominModel.ProductBrand" Width="1.5" PointX="8.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SagrominModel.Province" Width="1.5" PointX="1.5" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SagrominModel.Sale" Width="1.5" PointX="8.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SagrominModel.SaleDetail" Width="1.5" PointX="13.5" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SagrominModel.SalePay" Width="1.5" PointX="10.5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SagrominModel.StockProduct" Width="1.5" PointX="10.5" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SagrominModel.User" Width="1.5" PointX="6" PointY="7.125" IsExpanded="true" />
+        <AssociationConnector Association="SagrominModel.FK_Customer_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="SagrominModel.FK_User_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="SagrominModel.FK_ProductBrand_Brand" ManuallyRouted="false" />
+        <AssociationConnector Association="SagrominModel.FK_Customer_District" ManuallyRouted="false" />
+        <AssociationConnector Association="SagrominModel.FK_Sale_Customer1" ManuallyRouted="false" />
+        <AssociationConnector Association="SagrominModel.FK_Province_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="SagrominModel.FK_District_Province" ManuallyRouted="false" />
+        <AssociationConnector Association="SagrominModel.FK_Local_District" ManuallyRouted="false" />
+        <AssociationConnector Association="SagrominModel.FK_User_District" ManuallyRouted="false" />
+        <AssociationConnector Association="SagrominModel.FK_EntryExitProduct_ProductBrand" ManuallyRouted="false" />
+        <AssociationConnector Association="SagrominModel.FK_EntryExitProduct_Sale" ManuallyRouted="false" />
+        <AssociationConnector Association="SagrominModel.FK_EntryExitProduct_User" ManuallyRouted="false" />
+        <AssociationConnector Association="SagrominModel.FK_Sale_Local1" ManuallyRouted="false" />
+        <AssociationConnector Association="SagrominModel.FK_User_Local" ManuallyRouted="false" />
+        <AssociationConnector Association="SagrominModel.FK_ProductBrand_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="SagrominModel.FK_SaleDetail_ProductBrand" ManuallyRouted="false" />
+        <AssociationConnector Association="SagrominModel.FK_StockProduct_ProductBrand" ManuallyRouted="false" />
+        <AssociationConnector Association="SagrominModel.FK_Sale_User1" ManuallyRouted="false" />
+        <AssociationConnector Association="SagrominModel.FK_SaleDetail_Sale1" ManuallyRouted="false" />
+        <AssociationConnector Association="SagrominModel.FK_SalePay_Sale1" ManuallyRouted="false" />
+        <AssociationConnector Association="SagrominModel.FK_SalePay_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
