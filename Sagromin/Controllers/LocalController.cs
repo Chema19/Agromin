@@ -32,6 +32,10 @@ namespace Sagromin.Controllers
         {
             try
             {
+                if (model.Phone.Length != 9) {
+                    PostMessage(MessageType.Error, "Numero de celular invalido");
+                    return RedirectToAction("ListLocal");
+                }
                 using (var ts = new TransactionScope())
                 {
 
