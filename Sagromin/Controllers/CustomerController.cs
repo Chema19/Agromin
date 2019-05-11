@@ -7,6 +7,7 @@ using Sagromin.ViewModels.Customer;
 using System.Transactions;
 using Sagromin.Models;
 using Sagromin.Helpers;
+using System.Text.RegularExpressions;
 
 namespace Sagromin.Controllers
 {
@@ -32,6 +33,12 @@ namespace Sagromin.Controllers
         {
             try
             {
+
+                if (!email_bien_escrito(model.Email)) {
+                    PostMessage(MessageType.Error, "Formato email incorrecto");
+                    return RedirectToAction("ListCustomer");
+                }
+
                 using (var ts = new TransactionScope())
                 {
 
@@ -95,5 +102,26 @@ namespace Sagromin.Controllers
                 return Json(new { });
             }
         }
+
+        private Boolean email_bien_escrito(String email)
+        {
+            String expresion;
+            expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+            if (Regex.IsMatch(email, expresion))
+            {
+                if (Regex.Replace(email, expresion, String.Empty).Length == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }   
     }
 }
