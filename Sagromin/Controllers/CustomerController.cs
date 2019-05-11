@@ -34,6 +34,11 @@ namespace Sagromin.Controllers
             try
             {
 
+                if (model.Identity_Document.Length != 8)
+                {
+                    PostMessage(MessageType.Error, "El DNI debe de contener 8 caracteres");
+                    return RedirectToAction("ListCustomer");
+                }
                 if (!email_bien_escrito(model.Email)) {
                     PostMessage(MessageType.Error, "Formato email incorrecto");
                     return RedirectToAction("ListCustomer");

@@ -8,6 +8,7 @@ using System.Transactions;
 using Sagromin.Models;
 using Sagromin.Helpers;
 using Sagromin.Logics;
+using System.Text.RegularExpressions;
 
 namespace Sagromin.Controllers
 {
@@ -38,6 +39,12 @@ namespace Sagromin.Controllers
                     PostMessage(MessageType.Error, "El DNI debe de contener 8 caracteres");
                     return RedirectToAction("ListUser");
                 }
+                if (!email_bien_escrito(model.Email))
+                {
+                    PostMessage(MessageType.Error, "Formato email incorrecto");
+                    return RedirectToAction("ListUser");
+                }
+
 
                 using (var ts = new TransactionScope()) {
 
@@ -105,6 +112,26 @@ namespace Sagromin.Controllers
             }
             catch (Exception e) {
                 return Json(new { });
+            }
+        }
+        private Boolean email_bien_escrito(String email)
+        {
+            String expresion;
+            expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+            if (Regex.IsMatch(email, expresion))
+            {
+                if (Regex.Replace(email, expresion, String.Empty).Length == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
             }
         }
     }

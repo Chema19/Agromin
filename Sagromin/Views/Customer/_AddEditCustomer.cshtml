@@ -49,7 +49,7 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label for="" class="col-form-label">@Html.LabelFor(x => x.Identity_Document)<span class="text-danger">*</span></label>
-                @Html.TextBoxFor(x => x.Identity_Document, new { @class = "form-control", placeholder = "Dni/Ce" })
+                @Html.TextBoxFor(x => x.Identity_Document, new { @class = "form-control onlyDniPeru onlyNumbers", placeholder = "Dni/Ce" })
                 <div class="invalid-tooltip">
                     Please provide a valid state.
                 </div>
@@ -63,7 +63,7 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label for="" class="col-form-label">@Html.LabelFor(x => x.Phone)<span class="text-danger">*</span></label>
-                @Html.TextBoxFor(x => x.Phone, new { @class = "form-control", placeholder = "Celular" })
+                @Html.TextBoxFor(x => x.Phone, new { @class = "form-control onlyCelularPeru onlyNumbers", placeholder = "Celular" })
                 <div class="invalid-tooltip">
                     Please provide a valid zip.
                 </div>
