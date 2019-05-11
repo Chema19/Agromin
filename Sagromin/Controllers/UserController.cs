@@ -87,10 +87,12 @@ namespace Sagromin.Controllers
                 {
                     if (Id.HasValue)
                     {
+
                         var user = context.User.FirstOrDefault(x => x.UserId == Id);
                         user.Status = ConstantHelpers.ESTADO.INACTIVO;
                         context.SaveChanges();
                         validacion = true;
+
                     }
                     ts.Complete();
                 }
