@@ -34,7 +34,7 @@ namespace Sagromin.Controllers
             try
             {
                 if (email_bien_escrito(model.Email) == false) {
-                    PostMessage(MessageType.Error, "Formato de email incorrecto");
+                    PostMessage(MessageType.Error, "Formato email incorrecto");
                     return RedirectToAction("ListCustomer");
                 }
 
