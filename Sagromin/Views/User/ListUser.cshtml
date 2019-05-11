@@ -27,14 +27,14 @@
                 <table class="table mb-0" id="tbluser">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Nombres</th>
-                            <th>Apellidos</th>
-                            <th>Celular</th>
-                            <th>Dni</th>
-                            <th>Correo Electrónico</th>
-                            <th>Estado</th>
-                            <th>Opciones</th>
+                            <th><label>#</label></th>
+                            <th><label>Nombres</label></th>
+                            <th><label>Apellidos</label></th>
+                            <th><label>Celular</label></th>
+                            <th><label>Dni</label></th>
+                            <th><label>Correo Electrónico</label></th>
+                            <th><label>Estado</label></th>
+                            <th><label>Opciones</label></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,11 +42,11 @@
                         {
                             <tr class="@(index % 2 != 1 ? "" : "table-info") ">
                                 <th scope="row">@index</th>
-                                <td>@(item.Names == null ? "Anónimo" : item.Names)</td>
-                                <td>@(item.Last_Names == null ? "Anónimo" : item.Last_Names)</td>
-                                <td>@(item.Phone == null ? "Anónimo" : item.Phone)</td>
-                                <td>@(item.Identity_Document == null ? "Anónimo" : item.Identity_Document)</td>
-                                <td>@(item.Email == null ? "Anónimo" : item.Email)</td>
+                                <td><label>@(item.Names == null ? "Anónimo" : item.Names)</label></td>
+                                <td><label>@(item.Last_Names == null ? "Anónimo" : item.Last_Names)</label></td>
+                                <td><label>@(item.Phone == null ? "Anónimo" : item.Phone)</label></td>
+                                <td><label>@(item.Identity_Document == null ? "Anónimo" : item.Identity_Document)</label></td>
+                                <td><label>@(item.Email == null ? "Anónimo" : item.Email)</label></td>
                                 <td>@Html.Raw(ConstantHelpers.ESTADO.GetLabelEstado(item.Status))</td>
                                 <td>
                                     <a @Data.ModalLink("_AddEditUser", "User", new { UserId = item.UserId })><i class="fa fa-edit" style="color:dodgerblue"></i></a>&nbsp;
@@ -77,8 +77,9 @@
 
 @section Scripts{
     <script>
+
+        //ELIMINAR USUARIO
         $('#tbluser').on('click', '.delete', function () {
-            
             Swal.fire({
                 type: 'info',
                 title: 'Eliminar usuario',

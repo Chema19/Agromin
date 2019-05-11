@@ -43,8 +43,8 @@ namespace Sagromin.ViewModels.User
         public String Sex { set; get; }
         public List<Sex> LstSex { set; get; }
 
-        [Display(Name = "Dni / Ce : ")]
-        [Required(ErrorMessage = "El campo dni/ce es requerido")]
+        [Display(Name = "Dni : ")]
+        [Required(ErrorMessage = "El campo dni es requerido")]
         public String Identity_Document { set; get; }
 
         [Display(Name = "Email : ")]

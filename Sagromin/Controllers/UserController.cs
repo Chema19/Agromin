@@ -34,6 +34,11 @@ namespace Sagromin.Controllers
             try {
                 var dniExiste = context.User.FirstOrDefault(x => x.Identity_Document == model.Identity_Document);
 
+                if (model.Identity_Document.Length != 8) {
+                    PostMessage(MessageType.Error, "El DNI debe de contener 8 caracteres");
+                    return RedirectToAction("ListUser");
+                }
+
                 using (var ts = new TransactionScope()) {
 
                     User user = new User();
@@ -87,10 +92,12 @@ namespace Sagromin.Controllers
                 {
                     if (Id.HasValue)
                     {
+
                         var user = context.User.FirstOrDefault(x => x.UserId == Id);
                         user.Status = ConstantHelpers.ESTADO.INACTIVO;
                         context.SaveChanges();
                         validacion = true;
+
                     }
                     ts.Complete();
                 }
